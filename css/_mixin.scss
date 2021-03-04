@@ -1,0 +1,25 @@
+// let's mixin right below
+
+@mixin display ($dF, $jCc, $aIc) {
+    display: $dF;
+    justify-content: $jCc;
+    align-items: $aIc;
+}
+
+@mixin measurement ($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin visibility {
+    backface-visibility: visible !important;
+    animation-duration: .75s;
+}
+
+@mixin position ($position, $top, $right, $bottom, $left) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}

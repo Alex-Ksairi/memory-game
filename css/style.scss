@@ -1,0 +1,360 @@
+/* all imported files */
+@import "./reset";
+@import "./variables";
+@import "./mixin";
+@import './fonts';
+
+
+/* styling starts right below  */
+html {
+	box-sizing: border-box;
+}
+
+body {
+    background-image: url('../images/wooden-background_24972-623.jpg');
+    object-fit: cover;
+
+    font: {
+        family: $permanent;
+        size: 16px;
+    }
+    color: $font-color;
+}
+
+.outwrapper {
+    min-height: 100vh;
+    position: relative;
+
+    .container {
+        @include display (flex, center, center);
+        flex-direction: column;
+        margin-bottom: 80px;
+    }
+    
+    h1 {
+        margin: 50px;
+        font-family: $gloria;
+    }
+    
+    /* Styles for the deck of cards */
+    
+    .deck {
+        width: 85%;
+        padding: 1rem;
+        margin: 0 0 3em;
+        background: $bg-color;
+        border-radius: 4px;
+        box-shadow: 8px 9px 26px 0 $box-shadow;
+    
+        @include display (flex, center, center);
+        flex-wrap: wrap;
+        grid-gap: 20px;
+    
+        .card {
+            @include measurement (3.7rem, 3.7rem);
+            margin: 0.2rem 0.2rem;
+            background: $card-bg-color;
+            font-size: 0;
+            color: $font-color;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 5px 2px 20px 0 $box-shadow;
+            
+            @include display (flex, center, center);
+    
+            &.open {
+                transform: rotateY(0);
+                background: #02b3e4;
+                cursor: default;
+    
+                animation-name: flipInY;
+                @include visibility;
+            }
+    
+            &.show {
+                font-size: 33px;
+            }
+    
+            &.match {
+                background: #E5F720;
+                font-size: 33px;
+                cursor: default;
+    
+                animation-name: rubberBand;
+                @include visibility;
+            }
+    
+            &.unmatched {
+                background: #e2043b;
+                animation-name: pulse;
+                @include visibility;
+            }
+    
+            &.disabled {
+                pointer-events: none;
+                opacity: 0.9;
+            }
+        }
+    }
+    
+    /* Styles for the Score Panel */
+    
+    
+    .score-panel {
+        text-align: left;
+        margin-bottom: 10px;
+    
+        .stars {
+            // margin: 0;
+            padding: 0;
+            display: inline-block;
+            margin: 0 5px 0 0;
+    
+            li {
+                list-style: none;
+                display: inline-block;
+            }
+        }
+    
+        .restart {
+            float: right;
+            cursor: pointer;
+        }
+    }
+    
+    .fa-star {
+        color: $stars;
+    }
+    
+    .timer {
+        display: inline-block;
+        margin: 0 1rem;
+    }
+    
+    /* Styles for congratulations modal */
+    
+    
+    .overlay {
+        @include position (fixed, 0, 0, 0, 0);
+    
+        background: $overlay-color;
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    
+        &:target {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+    
+    .popup {
+        width: 85%;
+        margin: 70px auto;
+        padding: 20px;
+        background: $font-color;
+        border-radius: 5px;
+        font-family: $gloria;
+    
+        position: relative;
+        transition: all 5s ease-in-out;
+    
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: $tahoma;
+        }
+    
+        .close {
+            @include position (absolute, 20px, 30px, 0, 0);
+    
+            transition: all 200ms;
+            font: {
+                size: 30px;
+                weight: bold;
+            }
+            
+            color: #333;
+    
+            &:hover {
+                color: $hover-color;
+            }
+        }
+    
+        .content-1, .content-2 {
+            max-height: 30%;
+            overflow: auto;
+            text-align: center;
+        }
+    }
+    
+    .show {
+        visibility: visible !important;
+        opacity: 100 !important;
+    }
+    
+    #starRating li {
+        display: inline-block;
+    }
+    
+    #play-again {
+        width: 50%;
+        padding: 0.7rem 1rem;
+        margin: 0 auto;
+        background-color: $card-bg-color;
+        color: $font-color;
+        border-radius: 5px;
+        font: {
+            size: 1.1rem;
+            family: $gloria;
+        }
+    
+        display: block;
+    }
+    
+    /* animations */
+    @keyframes flipInY {
+        from {
+            transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+            animation-timing-function: ease-in;
+            opacity: 0;
+        }
+    
+        40% {
+            transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+            animation-timing-function: ease-in;
+        }
+    
+        60% {
+            transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+            opacity: 1;
+        }
+    
+        80% {
+            transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+        }
+    
+        to {
+            transform: perspective(400px);
+        }
+    }
+    
+    @keyframes rubberBand {
+        from {
+            transform: scale3d(1, 1, 1);
+        }
+    
+        30% {
+            transform: scale3d(1.25, 0.75, 1);
+        }
+    
+        40% {
+            transform: scale3d(0.75, 1.25, 1);
+        }
+    
+        50% {
+            transform: scale3d(1.15, 0.85, 1);
+        }
+    
+        65% {
+            transform: scale3d(.95, 1.05, 1);
+        }
+    
+        75% {
+            transform: scale3d(1.05, .95, 1);
+        }
+    
+        to {
+            transform: scale3d(1, 1, 1);
+        }
+    }
+    
+    @keyframes pulse {
+        from {
+            transform: scale3d(1, 1, 1);
+        }
+    
+        50% {
+            transform: scale3d(1.2, 1.2, 1.2);
+        }
+    
+        to {
+            transform: scale3d(1, 1, 1);
+        }
+    }
+    
+    // Footer
+    footer {
+        @include measurement (100%, 70px);
+        line-height: 70px;
+        background-color: #333;
+        color: $font-color;
+        text-align: center;
+    
+        // display: flex;
+        position: absolute;
+        width: 100%;
+        margin-top: 20px;
+    
+        .copyRight {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
+    
+        .social {
+            position: absolute;
+            right: 60px;
+            font-size: 1.2rem;
+            
+            a {
+                color: $font-color;
+                .fab {
+                    margin: 0 10px;
+                    
+                    &:hover {
+                        color: rgb(99, 50, 50);
+                        transform: scale(2.2);
+                    }
+                }
+            }
+        }
+    }
+
+    /******** Media queries *********/
+    
+    
+    @media (max-width: 320px) {
+        .deck {
+            width: 85%;
+        }
+    
+        .deck .card {
+            @include measurement (4.7rem, 4.7rem);
+        }
+    
+    }
+    
+    
+    /***************** For Tablets and larger screens ****************/
+    
+    @media (min-width: 768px) {
+        .container {
+            font-size: 22px;
+        }
+    
+        .deck {
+            @include measurement (660px, 680px);
+        }
+    
+        .deck .card {
+            @include measurement (125px, 125px);
+        }
+    
+        .popup {
+            width: 60%;
+        }
+    }
+    
+}
+

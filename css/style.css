@@ -1,0 +1,477 @@
+/* all imported files */
+/* resetting css file */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Permanent+Marker&display=swap");
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+/* variables here */
+/* the imported fonts google */
+/* styling starts right below  */
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-image: url("../images/wooden-background_24972-623.jpg");
+  -o-object-fit: cover;
+     object-fit: cover;
+  font-family: "Permanent Marker", cursive;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.outwrapper {
+  min-height: 100vh;
+  position: relative;
+  /* Styles for the deck of cards */
+  /* Styles for the Score Panel */
+  /* Styles for congratulations modal */
+  /* animations */
+  /******** Media queries *********/
+  /***************** For Tablets and larger screens ****************/
+}
+
+.outwrapper .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 80px;
+}
+
+.outwrapper h1 {
+  margin: 50px;
+  font-family: "Gloria Hallelujah", cursive;
+}
+
+.outwrapper .deck {
+  width: 85%;
+  padding: 1rem;
+  margin: 0 0 3em;
+  background: rgba(131, 97, 52, 0.5);
+  border-radius: 4px;
+  -webkit-box-shadow: 8px 9px 26px 0 rgba(73, 83, 90, 0.5);
+          box-shadow: 8px 9px 26px 0 rgba(73, 83, 90, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  grid-gap: 20px;
+}
+
+.outwrapper .deck .card {
+  width: 3.7rem;
+  height: 3.7rem;
+  margin: 0.2rem 0.2rem;
+  background: #221f228a;
+  font-size: 0;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 5px 2px 20px 0 rgba(73, 83, 90, 0.5);
+          box-shadow: 5px 2px 20px 0 rgba(73, 83, 90, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.outwrapper .deck .card.open {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+  background: #02b3e4;
+  cursor: default;
+  -webkit-animation-name: flipInY;
+          animation-name: flipInY;
+  -webkit-backface-visibility: visible !important;
+          backface-visibility: visible !important;
+  -webkit-animation-duration: .75s;
+          animation-duration: .75s;
+}
+
+.outwrapper .deck .card.show {
+  font-size: 33px;
+}
+
+.outwrapper .deck .card.match {
+  background: #E5F720;
+  font-size: 33px;
+  cursor: default;
+  -webkit-animation-name: rubberBand;
+          animation-name: rubberBand;
+  -webkit-backface-visibility: visible !important;
+          backface-visibility: visible !important;
+  -webkit-animation-duration: .75s;
+          animation-duration: .75s;
+}
+
+.outwrapper .deck .card.unmatched {
+  background: #e2043b;
+  -webkit-animation-name: pulse;
+          animation-name: pulse;
+  -webkit-backface-visibility: visible !important;
+          backface-visibility: visible !important;
+  -webkit-animation-duration: .75s;
+          animation-duration: .75s;
+}
+
+.outwrapper .deck .card.disabled {
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.outwrapper .score-panel {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.outwrapper .score-panel .stars {
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+
+.outwrapper .score-panel .stars li {
+  list-style: none;
+  display: inline-block;
+}
+
+.outwrapper .score-panel .restart {
+  float: right;
+  cursor: pointer;
+}
+
+.outwrapper .fa-star {
+  color: #FFD700;
+}
+
+.outwrapper .timer {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.outwrapper .overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-transition: opacity 500ms;
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.outwrapper .overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.outwrapper .popup {
+  width: 85%;
+  margin: 70px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  font-family: "Gloria Hallelujah", cursive;
+  position: relative;
+  -webkit-transition: all 5s ease-in-out;
+  transition: all 5s ease-in-out;
+}
+
+.outwrapper .popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: "Tahoma", Arial, sans-serif;
+}
+
+.outwrapper .popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+}
+
+.outwrapper .popup .close:hover {
+  color: #E5F720;
+}
+
+.outwrapper .popup .content-1, .outwrapper .popup .content-2 {
+  max-height: 30%;
+  overflow: auto;
+  text-align: center;
+}
+
+.outwrapper .show {
+  visibility: visible !important;
+  opacity: 100 !important;
+}
+
+.outwrapper #starRating li {
+  display: inline-block;
+}
+
+.outwrapper #play-again {
+  width: 50%;
+  padding: 0.7rem 1rem;
+  margin: 0 auto;
+  background-color: #221f228a;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-family: "Gloria Hallelujah", cursive;
+  display: block;
+}
+
+@-webkit-keyframes flipInY {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+  to {
+    -webkit-transform: perspective(400px);
+            transform: perspective(400px);
+  }
+}
+
+@keyframes flipInY {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+            transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+  to {
+    -webkit-transform: perspective(400px);
+            transform: perspective(400px);
+  }
+}
+
+@-webkit-keyframes rubberBand {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes rubberBand {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+            transform: scale3d(1.2, 1.2, 1.2);
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+.outwrapper footer {
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  background-color: #333;
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.outwrapper footer .copyRight {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.outwrapper footer .social {
+  position: absolute;
+  right: 60px;
+  font-size: 1.2rem;
+}
+
+.outwrapper footer .social a {
+  color: #ffffff;
+}
+
+.outwrapper footer .social a .fab {
+  margin: 0 10px;
+}
+
+.outwrapper footer .social a .fab:hover {
+  color: #633232;
+  -webkit-transform: scale(2.2);
+          transform: scale(2.2);
+}
+
+@media (max-width: 320px) {
+  .outwrapper .deck {
+    width: 85%;
+  }
+  .outwrapper .deck .card {
+    width: 4.7rem;
+    height: 4.7rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .outwrapper .container {
+    font-size: 22px;
+  }
+  .outwrapper .deck {
+    width: 660px;
+    height: 680px;
+  }
+  .outwrapper .deck .card {
+    width: 125px;
+    height: 125px;
+  }
+  .outwrapper .popup {
+    width: 60%;
+  }
+}
+/*# sourceMappingURL=style.css.map */
